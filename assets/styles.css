@@ -6,8 +6,13 @@
     --main-warning-color: #fabc1e;
     --main-critical-color: #FA26A0;
     --main-blue-color: #0e6acf;
+    --main-green-color: #259E84;
     --main-font-family: "Roboto Condensed", sans-serif;
     --secondary-font-family: "Allerta Stencil", sans-serif;
+}
+
+hr{
+    color: var(--main-txt-color);
 }
 
 
@@ -25,20 +30,33 @@ html, body {
 input{
     font-family: var(--main-font-family);
 }
+
+select{
+    cursor: pointer;
+    font-family: var(--main-font-family);
+    padding: 0.5rem;
+    border: none;
+    color: var(--main-txt-color);
+    background: var(--main-success-color);
+}
 button{
     font-family: var(--main-font-family);
 }
 
 #logo{
     font-family: var(--secondary-font-family);
+    width: auto;
+    z-index: 1;
 }
-#logo h1{
+#logo span:nth-child(1){
     font-size: 4rem;
-    color: var(--main-bg-color);
-}
-#logo span{
-    font-size: 2rem;
     color: var(--main-blue-color);
+    width: auto;
+}
+#logo span:nth-child(2){
+    font-size: 2rem;
+    color: var(--main-warning-color);
+    width: auto;
 }
 
 body {
@@ -50,22 +68,25 @@ body {
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    background: var(--main-warning-color);
+    padding: 1rem;
 }
 
 main {
+    padding: 2rem;
     flex-grow: 1;
 }
 
-footer {
-    background: var(--main-warning-color);
+footer{
+    padding: 1rem;
 }
 
-table, th, td {
-    border: 1px solid;
+footer>div {
+    height: 5rem;
+}
+
+
+th, td {
+    border: 2px solid var(--main-txt-color);
     padding: 0.4rem 0.6rem;
 }
 
@@ -86,11 +107,42 @@ table, th, td {
 }
 
 table {
-    padding: 10px;
-    border-collapse: collapse;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.4rem;
+    border-collapse: separate;
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+}
+#size-table input{
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+#order-table{
+
+}
+
+.btn-inc{
+    margin: 0.1rem;
+    border-radius: 5px 5px 0 0;
+    width: 1rem;
+    height: 0.5rem;
+    border: solid 1px var(--main-txt-color);
+    background: var(--main-success-color);
+    color: var(--main-bg-color);
+}
+
+.btn-dec{
+    margin: 0.1rem;
+    border-radius: 0 0 5px 5px;
+    width: 1rem;
+    height: 0.5rem;
+    border: solid 1px var(--main-txt-color);
+    background: var(--main-alert-color);
+    color: var(--main-bg-color);
 }
 
 table input {
@@ -98,6 +150,15 @@ table input {
     width: 100%;
     border: none;
     text-align: center;
+    color: inherit;
+    background: none;
+}
+
+#size-table input {
+    height: 1.4rem;
+    width: 3rem;
+    text-align: center;
+    border: none;
     color: inherit;
     background: none;
 }
@@ -131,6 +192,10 @@ table input:invalid {
     color: var(--main-blue-color);
 }
 
+.c-bg {
+    color: var(--main-bg-color);
+}
+
 .bg-alert {
     background: var(--main-alert-color);
 }
@@ -151,8 +216,15 @@ table input:invalid {
     background: var(--main-blue-color);
 }
 
+.bg-bg{
+    background: var(--main-bg-color);
+}
+
 .cell-btn {
     width: 100%;
+}
+.cell-no-border{
+    border: none;
 }
 
 button {
@@ -170,18 +242,19 @@ button {
 }
 
 #ordered-reset{
+    background: var(--main-blue-color);
     width: 5rem
 }
 
 @keyframes move-array {
     0% {
-        padding-left: 0px;
+        padding-left: 0;
     }
     75% {
         padding-left: 60px;
     }
     100% {
-        padding-left: 0px;
+        padding-left: 0;
     }
 }
 
@@ -211,15 +284,35 @@ button:active {
     display: flex;
     align-items: center;
     height: 2.6rem;
-    width: 120px;
     margin: 0.7rem 2rem 0;
     padding-left: 0.5rem;
     border-radius: 1rem;
     font-family: var(--secondary-font-family);
     font-size: 1.2rem;
     color: var(--main-blue-color);
+    background: none;
+}
+
+
+#like-counter-all{
+    color: var(--main-green-color);
+    width: auto;
+    text-align: right;
+    padding: 0 0.5rem;
+    margin-right: 1px;
+    border: 2px solid var(--main-green-color);
+    border-radius: 0.5rem 0 0 0.5rem ;
     background: var(--main-bg-color);
-    border: 0.2rem solid var(--main-blue-color);
+
+}
+#like-counter-personal{
+    color: var(--main-blue-color);
+    width: auto;
+    margin-right: 3rem;
+    padding: 0 0.5rem;
+    border: 2px solid var(--main-blue-color);
+    border-radius: 0 0.5rem 0.5rem 0;
+    background: var(--main-bg-color);
 }
 
 #like{
@@ -228,8 +321,8 @@ button:active {
     border-radius: 1rem;
     border: 0.2rem solid var(--main-blue-color);
     cursor: pointer;
-    width: 4rem;
     height: 4rem;
+    width: 4rem;
     padding: 0.5rem;
     z-index: 2;
     background: var(--main-bg-color);
@@ -284,6 +377,9 @@ button:active {
     user-select: none; /* Standard syntax */
     margin: 0.5rem;
     display: grid;
+    position: fixed;
+    right: 0;
+    bottom: 0;
 }
 
 #like:active img {
@@ -294,21 +390,58 @@ button:active {
     opacity: 1;
 }
 
-.d-flex{
+.d-flex-col{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+}
+.d-flex-c{
+    display: flex;
     align-items: center;
+}
+.d-flex-c-wrap{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.badge-size{
+    width: 1rem;
+    text-align: center;
+    color: var(--main-bg-color);
+    background: var(--main-txt-color);
+    padding: 0.15rem;
+    font-size: 0.7rem;
+    border-radius: 5px;
+    margin: 0.1rem;
+}
+.badge-size-2{
+    width: 1rem;
+    text-align: center;
+    color: var(--main-txt-color);
+    background: var(--main-bg-color);
+    padding: 0.15rem;
+    font-size: 0.7rem;
+    border-radius: 5px;
+    margin: 0.1rem;
+}
+.p-0{
+    padding: 0;
+}
+
+.table-head{
+    background: var(--main-warning-color);
+    color: var(--main-bg-color);
 }
 
 /* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+table input::-webkit-outer-spin-button,
+table input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
 /* Firefox */
-input[type=number] {
+table input[type=number] {
     -moz-appearance: textfield;
 }
 
