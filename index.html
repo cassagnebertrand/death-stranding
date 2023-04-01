@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
     <link rel="stylesheet" href="assets/styles.css">
-
 </head>
 <body>
 <header>
@@ -22,7 +21,8 @@
     <hr>
 </header>
 <main>
-    <div style="display: flex; justify-content: space-between;">
+    <style></style>
+    <div class="d-flex-b-wrap">
         <div>
             <table id="order-table">
                 <thead>
@@ -74,7 +74,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td class="txt-align-c border-none"><span id="arrow-add">➔</span></td>
+                    <td class="txt-align-c border-none"><span id="">➔</span></td>
                     <td colspan="2" class="txt-align-c border-none">
                         <button id="order-add" class="bg-success cell-btn">Add</button>
                     </td>
@@ -82,7 +82,7 @@
                 </tfoot>
             </table>
         </div>
-        <div style="display: flex; justify-content: space-between;">
+        <div class="d-flex-b-wrap">
             <div>
                 <table>
                     <thead>
@@ -92,7 +92,7 @@
                     <tr>
                         <th class="p-0" style="width: 10rem">
                             <select id="transport-modes">
-                                <option value="" disable hidden>Please choose an option</option>
+                                <option value="" disabled hidden>Please choose an option</option>
                             </select>
                         </th>
                         <th style="width: 5rem">Capacity</th>
@@ -100,12 +100,17 @@
                     </tr>
                     </thead>
                     <tbody id="transport-container-info">
-
+                    <tr>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
                     </tbody>
                     <tfoot>
                     <tr>
                         <td class="bg-warning c-bg">Total Capacity</td>
                         <td id="max-capacity">0</td>
+                        <td class="bg-bg cell-no-border"></td>
                     </tr>
                     </tfoot>
                 </table>
@@ -120,19 +125,51 @@
                     <tbody>
                     <tr>
                         <td class="d-flex-c">The <span class="badge-size">XL</span> size take 6 capacity</td>
-                        <td class="p-0"><div class="d-flex-c"><input id="xl-input" name="xl-input" type="number" min="0" max="99" value="0" readonly><div class="d-flex-col"><button class="btn-inc" onclick="inc('xl-input')"></button><button class="btn-dec" onclick="dec('xl-input')"></button></div></div></td>
+                        <td class="p-0">
+                            <div class="d-flex-c"><input id="xl-input" name="xl-input" type="number" min="0" max="99"
+                                                         value="0" readonly>
+                                <div class="d-flex-col">
+                                    <button class="btn-inc" onclick="inc('xl-input')"></button>
+                                    <button class="btn-dec" onclick="dec('xl-input')"></button>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td class="d-flex-c">The <span class="badge-size">L</span> size take 4 capacity</td>
-                        <td class="p-0"><div class="d-flex-c"><input id="l-input" name="l-input" type="number" min="0" max="99" value="0" readonly><div class="d-flex-col"><button class="btn-inc" onclick="inc('l-input')"></button><button class="btn-dec" onclick="dec('l-input')"></button></div></div></td>
+                        <td class="p-0">
+                            <div class="d-flex-c"><input id="l-input" name="l-input" type="number" min="0" max="99"
+                                                         value="0" readonly>
+                                <div class="d-flex-col">
+                                    <button class="btn-inc" onclick="inc('l-input')"></button>
+                                    <button class="btn-dec" onclick="dec('l-input')"></button>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td class="d-flex-c">The <span class="badge-size">M</span> size take 2 capacity</td>
-                        <td class="p-0"><div class="d-flex-c"><input id="m-input" name="m-input" type="number" min="0" max="99" value="0" readonly><div class="d-flex-col"><button class="btn-inc" onclick="inc('m-input')"></button><button class="btn-dec" onclick="dec('m-input')"></button></div></div></td>
+                        <td class="p-0">
+                            <div class="d-flex-c"><input id="m-input" name="m-input" type="number" min="0" max="99"
+                                                         value="0" readonly>
+                                <div class="d-flex-col">
+                                    <button class="btn-inc" onclick="inc('m-input')"></button>
+                                    <button class="btn-dec" onclick="dec('m-input')"></button>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td class="d-flex-c">The <span class="badge-size">S</span> size take 1 capacity</td>
-                        <td class="p-0"><div class="d-flex-c"><input id="s-input" name="s-input" type="number" min="0" max="99" value="0" readonly><div class="d-flex-col"><button class="btn-inc" onclick="inc('s-input')"></button><button class="btn-dec" onclick="dec('s-input')"></button></div></div></td>
+                        <td class="p-0">
+                            <div class="d-flex-c"><input id="s-input" name="s-input" type="number" min="0" max="99"
+                                                         value="0" readonly>
+                                <div class="d-flex-col">
+                                    <button class="btn-inc" onclick="inc('s-input')"></button>
+                                    <button class="btn-dec" onclick="dec('s-input')"></button>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     </tbody>
                     <tfoot>
@@ -146,8 +183,18 @@
             </div>
         </div>
     </div>
-    <table>
+    <table id="ordered-table">
         <thead>
+        <col class="col1"/>
+        <col class="col2"/>
+        <col class="col3"/>
+        <col class="col4"/>
+        <col class="col5"/>
+        <col class="col6"/>
+        <col class="col7"/>
+        <col class="col8"/>
+        <col class="col9"/>
+        <col class="col10"/>
         <tr class="table-head">
             <th>Order</th>
             <th>Chiral crystals</th>
@@ -163,7 +210,20 @@
             </th>
         </tr>
         </thead>
-        <tbody id="ordered"></tbody>
+        <tbody id="ordered">
+        <tr>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td class="cell-no-border"></td>
+        </tr>
+        </tbody>
         <tfoot>
         <tr id="ordered-total">
             <td class="bg-blue c-bg">Total ➔</td>
@@ -181,15 +241,17 @@
     <div id="like-zone">
         <div id="like-counter"><span id="like-counter-all">0</span><span id="like-counter-personal">0</span></div>
         <div id="add-like-effect"></div>
-        <button id="like" class="bg-blue"><img src="assets/img/like.png"></button>
+        <button id="like" class="bg-blue"><img src="assets/img/like.png" alt="img"></button>
     </div>
 </main>
 <footer>
     <hr>
-    <div>
-    </div>
+    <br>
+    <br>
+    <br>
+    <br>
 </footer>
-<script src="main.js"></script>
 <script src="modules/data.js"></script>
+<script src="main.js"></script>
 </body>
 </html>

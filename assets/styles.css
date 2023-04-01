@@ -106,11 +106,15 @@ th, td {
     border: none;
 }
 
+.overflow-x{
+    overflow-x: auto;
+}
+
 table {
+    margin: 2rem;
     border: none;
     border-radius: 1rem;
     padding: 0.4rem;
-    border-collapse: separate;
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
@@ -401,6 +405,12 @@ button:active {
 .d-flex-c-wrap{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.d-flex-b-wrap{
+    justify-content: space-between;
+    display: flex;
     flex-wrap: wrap;
 }
 

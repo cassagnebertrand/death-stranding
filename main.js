@@ -1,28 +1,26 @@
-let orderName = document.getElementById('order-name');
-let tbodyOrder = document.getElementById('tbody-order')
-let orderAdd = document.getElementById('order-add');
-let ordered = document.getElementById('ordered');
-let orderedTotal = document.getElementById('ordered-total');
-let orderedReset = document.getElementById('ordered-reset');
-let addLikeEffect = document.getElementById('add-like-effect');
-let like = document.getElementById('like');
-let likeCounter = document.getElementById('like-counter')
-let likeCounterAll = document.getElementById('like-counter-all')
-let likeCounterPersonal = document.getElementById('like-counter-personal')
-let transportModes = document.getElementById('transport-modes')
-let maxCapacityInfo = document.getElementById('max-capacity')
+const orderName = document.getElementById('order-name');
+const tbodyOrder = document.getElementById('tbody-order')
+const orderAdd = document.getElementById('order-add');
+const ordered = document.getElementById('ordered');
+const orderedTotal = document.getElementById('ordered-total');
+const orderedReset = document.getElementById('ordered-reset');
+const addLikeEffect = document.getElementById('add-like-effect');
+const like = document.getElementById('like');
+const likeCounter = document.getElementById('like-counter')
+const likeCounterAll = document.getElementById('like-counter-all')
+const likeCounterPersonal = document.getElementById('like-counter-personal')
+const transportModes = document.getElementById('transport-modes')
+const maxCapacityInfo = document.getElementById('max-capacity')
+const orderedTable = document.getElementById('ordered-table')
 
 
-let inputXL = document.getElementById("xl-input");
-let inputL = document.getElementById("l-input");
-let inputM = document.getElementById("m-input");
-let inputS = document.getElementById("s-input");
+const inputXL = document.getElementById("xl-input");
+const inputL = document.getElementById("l-input");
+const inputM = document.getElementById("m-input");
+const inputS = document.getElementById("s-input");
 
-let transportContainerInfo = document.getElementById("transport-container-info");
-let actualCapacity = document.getElementById("actual-capacity")
-
-
-
+const transportContainerInfo = document.getElementById("transport-container-info");
+const actualCapacity = document.getElementById("actual-capacity")
 
 
 window.onload = () => {
@@ -53,7 +51,7 @@ function inc(element) {
         el.value = parseInt(el.value) + 1;
         calcSize()
         playSound('add')
-    }else {
+    } else {
         playSound('error')
     }
 }
@@ -64,16 +62,12 @@ function dec(element) {
         el.value = parseInt(el.value) - 1;
         calcSize()
         playSound('remove')
-    }else {
+    } else {
         playSound('error')
     }
 }
 
 // Transport Mode
-
-
-let maxCapacity = 0;
-
 function transportMode() {
     transport.forEach(mode => {
         let option = document.createElement('option')
@@ -83,26 +77,13 @@ function transportMode() {
     })
 }
 
+function calcSize() {
 
+    let countXL = inputXL.value > 0 ? inputXL.value * 6 : 0;
+    let countL = inputL.value > 0 ? inputL.value * 4 : 0;
+    let countM = inputM.value > 0 ? inputM.value * 2 : 0;
+    let countS = inputS.value > 0 ? inputS.value * 1 : 0;
 
-function calcSize(){
-
-    let countXL = 0
-    let countL = 0
-    let countM = 0
-    let countS = 0
-
-    inputXL.value > 0 ? countXL = inputXL.value * 6 :  countXL = 0
-    inputL.value > 0 ? countL = inputL.value * 4 :  countL = 0
-    inputM.value > 0 ? countM = inputM.value * 2 :  countM = 0
-    inputS.value > 0 ? countS = inputS.value * 1 :  countS = 0
-
-    /*
-    console.log('XL:',countXL)
-    console.log('L:',countL)
-    console.log('M:',countM)
-    console.log('S:',countS)
-    */
     actualCapacity.innerHTML = countXL + countL + countM + countS;
 }
 
@@ -121,31 +102,9 @@ transportModes.addEventListener('change', (event) => {
     })
 
     maxCapacityInfo.innerHTML = maxCapacity;
-    //console.log(transport[event.target.value - 1])
 });
-
-/*
-inputXL.addEventListener('change', (event) => {
-    event.target.value
-    calcSize()
-});
-inputL.addEventListener('change', (event) => {
-    event.target.value
-    calcSize()
-});
-inputM.addEventListener('change', (event) => {
-    event.target.value
-    calcSize()
-});
-inputS.addEventListener('change', (event) => {
-    event.target.value
-    calcSize()
-});
-*/
-
 
 // Order logic
-
 function checkDiff(rawValue1, rawValue2) {
     if (isNaN(rawValue1) || isNaN(rawValue2)) {
         return 0
@@ -166,7 +125,7 @@ function allocate(material, quantity) {
     let minusContainerQuantity = box[0].quantity
     let quantityAllocated = 0;
     while (quantityAllocated < quantity) {
-        if ((quantity - quantityAllocated - box[index].quantity > - minusContainerQuantity) || (index == 0)) {
+        if ((quantity - quantityAllocated - box[index].quantity > -minusContainerQuantity) || (index === 0)) {
             quantityAllocated += box[index].quantity;
             boxToLoad.push(box[index])
         } else {
@@ -185,18 +144,17 @@ function deliveryInfo(containers) {
         totalQuantity += container.quantity;
         totalWeight += container.weight;
         totalSpace += container.size.space
-        if (container.size.name == 'S') {
+        if (container.size.name === 'S') {
             totalSizeType.s++
-        } else if (container.size.name == 'M') {
+        } else if (container.size.name === 'M') {
             totalSizeType.m++
-        } else if (container.size.name == 'L') {
+        } else if (container.size.name === 'L') {
             totalSizeType.l++
-        } else if (container.size.name == 'XL') {
+        } else if (container.size.name === 'XL') {
             totalSizeType.xl++
         }
     })
     return [{totalWeight: totalWeight, totalSpace: totalSpace, totalSizeType: totalSizeType}, totalQuantity]
-
 }
 
 function save(rawOrder) {
@@ -288,15 +246,14 @@ function deleteRow(id) {
     playSound('remove')
     setTimeout(() => {
         let orders = JSON.parse(localStorage.getItem('orders'))
-        let indexCount = 0
-        orders.forEach(order => {
-            if (order.id === id) {
-                let data = orders.splice(indexCount, 1)
-                localStorage.setItem('orders', JSON.stringify(orders));
-                render()
-            }
-            indexCount++
-        })
+
+        orders.splice(orders.indexOf(orders.find(order => order.id === id)), 1)
+
+        localStorage.setItem('orders', JSON.stringify(orders));
+
+        render()
+
+
     }, 20)
 }
 
@@ -305,20 +262,41 @@ function render() {
     let orders = JSON.parse(localStorage.getItem('orders'))
     if (orders !== null) {
 
-        //console.log(orders)
-        ordered.innerHTML = '';
+        ordered.innerHTML = orders.length === 0 ? `
+            <tr>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td class="cell-no-border"></td>
+            </tr>
+        ` : ``;
 
 
-        let totalWeight = 0
+        let totalWeight = 0, totalCrystals = 0, totalResins = 0, totalMetals = 0, totalCeramics = 0, totalChemicals = 0,
+            totalAlloys = 0
         let totalSizeType = {
             s: 0, m: 0, l: 0, xl: 0
         }
-        let totalCrystals = 0
-        let totalResins = 0
-        let totalMetals = 0
-        let totalCeramics = 0
-        let totalChemiclas = 0
-        let totalAlloys = 0
+
+
+        const spanSizeFormat = (obj) => {
+            let spanSize = ``;
+            Object.keys(obj).forEach(key => {
+                spanSize += obj[key] > 0 ? `
+                    <div class="d-flex-c">${obj[key]}
+                        <span class="x"> \t&#xD7;</span>
+                        <span class="badge-size">${key.toUpperCase()}</span>
+                    </div>
+                ` : ``;
+            })
+            return spanSize === `` ? `...` : spanSize;
+        };
 
         orders.forEach(order => {
             totalWeight += order.orderInfo.totalWeight
@@ -330,7 +308,7 @@ function render() {
             totalResins += order.orderInfo.materials[1].totalQuantity
             totalMetals += order.orderInfo.materials[2].totalQuantity
             totalCeramics += order.orderInfo.materials[3].totalQuantity
-            totalChemiclas += order.orderInfo.materials[4].totalQuantity
+            totalChemicals += order.orderInfo.materials[4].totalQuantity
             totalAlloys += order.orderInfo.materials[5].totalQuantity
 
 
@@ -380,22 +358,9 @@ function render() {
                 html += `</td>`
             })
             html += `<td><span class="c-warning">${order.orderInfo.totalWeight}</span></td>`
-            let spanSize = ``;
-            if (order.orderInfo.totalSizeType.xl > 0) {
-                spanSize += `<div class="d-flex-c">${order.orderInfo.totalSizeType.xl}<span class="x"> \t&#xD7;</span><span class="badge-size">XL</span></div>`
-            }
-            if (order.orderInfo.totalSizeType.l > 0) {
-                spanSize += `<div class="d-flex-c">${order.orderInfo.totalSizeType.l}<span class="x"> \t&#xD7;</span><span class="badge-size">L</span></div>`
-            }
-            if (order.orderInfo.totalSizeType.m > 0) {
-                spanSize += `<div class="d-flex-c">${order.orderInfo.totalSizeType.m}<span class="x"> \t&#xD7;</span><span class="badge-size">M</span></div>`
-            }
-            if (order.orderInfo.totalSizeType.s > 0) {
-                spanSize += `<div class="d-flex-c">${order.orderInfo.totalSizeType.s}<span class="x"> \t&#xD7;</span><span class="badge-size">S</span></div>`
-            }
-            if (spanSize === ``) {
-                spanSize = `...`;
-            }
+
+
+            const spanSize = spanSizeFormat(order.orderInfo.totalSizeType);
 
             html += `<td><div class="d-flex-c-wrap">${spanSize}</div></td>`
             html += `<td class="cell-no-border"><button class="bg-alert cell-btn" onclick="deleteRow(${order.id})">Delete</button></td>`
@@ -404,60 +369,54 @@ function render() {
             ordered.appendChild(tr)
         })
 
-
-        let spanSize = ``;
-        if (totalSizeType.xl > 0) {
-            spanSize += `<div class="d-flex-c">${totalSizeType.xl}<span class="x"> \t&#xD7;</span><span class="badge-size">XL</span></div>`
-        }
-        if (totalSizeType.l > 0) {
-            spanSize += `<div class="d-flex-c">${totalSizeType.l}<span class="x"> \t&#xD7;</span><span class="badge-size">L</span></div>`
-        }
-        if (totalSizeType.m > 0) {
-            spanSize += `<div class="d-flex-c">${totalSizeType.m}<span class="x"> \t&#xD7;</span><span class="badge-size">M</span></div>`
-        }
-        if (totalSizeType.s > 0) {
-            spanSize += `<div class="d-flex-c">${totalSizeType.s}<span class="x"> \t&#xD7;</span><span class="badge-size">S</span></div>`
-        }
-        if (spanSize === ``) {
-            spanSize = `...`;
-        }
+        const spanSize = spanSizeFormat(totalSizeType);
 
         function zeroOrNot(value) {
-            if (value === 0) {
-                return `...`
-            } else {
-                return `<span class="c-success">${value}</span>`
+            return value === 0 ? `...` : `<span class="c-success">${value}</span>`
+        }
+
+
+        /*
+
+                */
+
+
+        orderedTotal.innerHTML = `
+            <td class="bg-blue c-bg">Total ➔</td>
+            <td>${zeroOrNot(totalCrystals)}</td>
+            <td>${zeroOrNot(totalResins)}</td>
+            <td>${zeroOrNot(totalMetals)}</td>
+            <td>${zeroOrNot(totalCeramics)}</td>
+            <td>${zeroOrNot(totalChemicals)}</td>
+            <td>${zeroOrNot(totalAlloys)}</td>
+            <td><span class="c-warning">${totalWeight}</span></td>
+            <td><div class="d-flex-c">${spanSize}</div></td>
+            <td class="cell-no-border"></td>
+        `;
+
+        function show_hide_column( col_no, do_show ){
+            const table  = document.getElementById( 'ordered-table' )
+            const column = table.getElementsByTagName( 'col' )[col_no]
+            if ( column ){
+                column.style.visibility = do_show?"":"collapse";
             }
         }
 
-        let htmlTotal = ``
-        htmlTotal +=
-            `<td class="bg-blue c-bg">Total ➔</td> ` +
-            `<td>${zeroOrNot(totalCrystals)}</td>` +
-            `<td>${zeroOrNot(totalResins)}</td>` +
-            `<td>${zeroOrNot(totalMetals)}</td>` +
-            `<td>${zeroOrNot(totalCeramics)}</td>` +
-            `<td>${zeroOrNot(totalChemiclas)}</td>` +
-            `<td>${zeroOrNot(totalAlloys)}</td>` +
-            `<td><span class="c-warning">${totalWeight}</span></td>` +
-            `<td><div class="d-flex-c">${spanSize}</div></td>`
-        orderedTotal.innerHTML = htmlTotal;
-
-
+        for (let i = 0; i < orderedTotal.children.length; i++) {
+            console.log(i)
+            orderedTotal.children[i].innerText === '...' ? show_hide_column(i,false) : show_hide_column(i,true);
+        }
     }
 }
 
 function validInput(value) {
-    if (value > 9999 || value < 0 || isNaN(value) || value === "") {
-        return false
-    } else {
-        return true
-    }
+    return !(value > 9999 || value < 0 || isNaN(value) || value === "");
 }
-transportModes.addEventListener('click', (event) => {
+
+transportModes.addEventListener('click', () => {
     playSound('nav')
 })
-orderAdd.addEventListener('click', (event) => {
+orderAdd.addEventListener('click', () => {
     let error = false
     let countDiffZero = 0
     let rawOrder = [orderName.value]
@@ -485,20 +444,31 @@ orderAdd.addEventListener('click', (event) => {
         })
     }
 });
-orderedReset.addEventListener('click', (event) => {
+orderedReset.addEventListener('click', () => {
     playSound('reset')
     setTimeout(() => {
         localStorage.removeItem('orders');
-        ordered.innerHTML = ``;
-        orderedTotal.innerHTML = `<td class="bg-blue c-bg">Total ➔</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td>`;
+        ordered.innerHTML = `
+        <tr>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td class="cell-no-border"></td>
+        </tr>
+        `;
+        orderedTotal.innerHTML = `<td class="bg-blue c-bg">Total ➔</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td class="cell-no-border"></td>`;
     }, 150)
 });
 
-
-like.addEventListener('click', (event) => {
+like.addEventListener('click', () => {
     addLike()
 });
-
 
 // Ajout de span pour les effets de points
 function addLike() {
@@ -522,10 +492,7 @@ function playSound(name) {
     audio.pause();
     audio.currentTime = 0;
     audio.play();
-    setTimeout(() => {
-    }, 100)
 }
-
 
 function updateLike(nbPoint) {
     let likeCounterPersonalValue = JSON.parse(localStorage.getItem('likeCounterPersonal'))
@@ -538,6 +505,3 @@ function updateLike(nbPoint) {
         likeCounterPersonal.innerHTML = likeCounterPersonalValue
     }
 }
-
-
-
