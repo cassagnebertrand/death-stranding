@@ -376,11 +376,6 @@ function render() {
         }
 
 
-        /*
-
-                */
-
-
         orderedTotal.innerHTML = `
             <td class="bg-blue c-w">Total ➔</td>
             <td>${zeroOrNot(totalCrystals)}</td>
