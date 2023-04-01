@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Roboto+Condensed:ital@1&display=swap');
+
+
+@font-face {
+    font-family: 'Roboto Condensed', sans-serif;
+    src: url("https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Roboto+Condensed:ital@1&display=swap");
+    font-display: swap;
+}
+
 :root {
     --main-bg-color: #222;
     --main-txt-color: #f2f2f2;
@@ -7,7 +16,7 @@
     --main-critical-color: #FA26A0;
     --main-blue-color: #0e6acf;
     --main-green-color: #259E84;
-    --main-font-family: "Roboto Condensed", sans-serif;
+    --main-font-family: 'Roboto Condensed', sans-serif;
     --secondary-font-family: "Allerta Stencil", sans-serif;
 }
 
