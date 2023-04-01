@@ -348,6 +348,7 @@ button:active {
 }
 #like img{
     width: 100%;
+    height: auto;
 }
 
 #add-like-effect{
