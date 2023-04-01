@@ -4,15 +4,13 @@ const orderAdd = document.getElementById('order-add');
 const ordered = document.getElementById('ordered');
 const orderedTotal = document.getElementById('ordered-total');
 const orderedReset = document.getElementById('ordered-reset');
+
 const addLikeEffect = document.getElementById('add-like-effect');
 const like = document.getElementById('like');
-const likeCounter = document.getElementById('like-counter')
-const likeCounterAll = document.getElementById('like-counter-all')
 const likeCounterPersonal = document.getElementById('like-counter-personal')
+
 const transportModes = document.getElementById('transport-modes')
 const maxCapacityInfo = document.getElementById('max-capacity')
-const orderedTable = document.getElementById('ordered-table')
-
 
 const inputXL = document.getElementById("xl-input");
 const inputL = document.getElementById("l-input");
