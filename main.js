@@ -350,7 +350,7 @@ function render() {
         }
 
         for (let i = 0; i < orderedTotal.children.length; i++) {
-            orderedTotal.children[i].innerText === '...' ? show_hide_column(i, false) : show_hide_column(i, true);
+            show_hide_column(i, !(orderedTotal.children[i].innerText === '...'))
         }
     }
 }
