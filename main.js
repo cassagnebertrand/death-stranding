@@ -398,7 +398,6 @@ function render() {
         }
 
         for (let i = 0; i < orderedTotal.children.length; i++) {
-            console.log(i)
             orderedTotal.children[i].innerText === '...' ? show_hide_column(i,false) : show_hide_column(i,true);
         }
     }
