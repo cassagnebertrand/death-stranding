@@ -410,7 +410,7 @@ like.addEventListener('click', () => {
 // Ajout de span pour les effets de points
 function addLike() {
     const newSpan = document.createElement("span");
-    newSpan.innerHTML = "+1";
+    newSpan.innerText = "+1";
     newSpan.setAttribute("class", "like-effect c-blue");
     addLikeEffect.append(newSpan);
     setTimeout(() => {
