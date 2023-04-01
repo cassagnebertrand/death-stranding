@@ -1,10 +1,12 @@
 @font-face {
     font-family: 'Roboto Condensed';
     src: url("fonts/RobotoCondensed-Regular.ttf") format("truetype");
+    font-display: swap;
 }
 @font-face {
     font-family: 'Allerta Stencil';
     src: url("fonts/AllertaStencil-Regular.ttf") format("truetype");
+    font-display: swap;
 }
 
 :root {
