@@ -276,8 +276,7 @@ function render() {
         ` : ``;
 
 
-        let totalWeight = 0, totalCrystals = 0, totalResins = 0, totalMetals = 0, totalCeramics = 0, totalChemicals = 0,
-            totalAlloys = 0
+        let totalWeight = 0, totalCrystals = 0, totalResins = 0, totalMetals = 0, totalCeramics = 0, totalChemicals = 0, totalAlloys = 0;
         let totalSizeType = {
             s: 0, m: 0, l: 0, xl: 0
         }
@@ -310,7 +309,7 @@ function render() {
             totalAlloys += order.orderInfo.materials[5].totalQuantity
 
 
-            let tr = document.createElement('tr')
+            const tr = document.createElement('tr')
             let html = `<tr> <td>${order.orderInfo.name}</td>`;
 
             order.orderInfo.materials.forEach(material => {
@@ -355,14 +354,10 @@ function render() {
                 }
                 html += `</td>`
             })
-            html += `<td><span class="c-warning">${order.orderInfo.totalWeight}</span></td>`
-
-
-            const spanSize = spanSizeFormat(order.orderInfo.totalSizeType);
-
-            html += `<td><div class="d-flex-c-wrap">${spanSize}</div></td>`
-            html += `<td class="cell-no-border"><button class="bg-alert cell-btn" onclick="deleteRow(${order.id})">Delete</button></td>`
-            html += `</tr>`
+            html += `<td><span class="c-warning">${order.orderInfo.totalWeight}</span></td>
+                    <td><div class="d-flex-c-wrap">${spanSizeFormat(order.orderInfo.totalSizeType)}</div></td>
+                    <td class="cell-no-border"><button class="bg-alert cell-btn" onclick="deleteRow(${order.id})">Delete</button></td>
+                </tr>`
             tr.innerHTML = html
             ordered.appendChild(tr)
         })
