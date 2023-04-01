@@ -32,8 +32,8 @@
                 </tr>
                 <tr>
                     <th colspan="1">Order name</th>
-                    <td colspan="2"><label for="order-name"></label><input id="order-name" class="txt-align-l" type="text" maxlength="30"
-                                                                           placeholder="Name"></td>
+                    <td colspan="2"><input id="order-name" class="txt-align-l" type="text" maxlength="30"
+                                                                           placeholder="Name" aria-label="Name of the order"></td>
                 </tr>
                 <tr>
                     <th>Material</th>
@@ -44,57 +44,57 @@
                 <tbody id="tbody-order">
                 <tr>
                     <td class="txt-align-c">Chiral crystals</td>
-                    <td class="p-0"><label>
-                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
-                    </label></td>
-                    <td class="p-0"><label>
-                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
-                    </label></td>
+                    <td class="p-0">
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0" aria-label="resources-delivered">
+                    </td>
+                    <td class="p-0">
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0" aria-label="resources-needed">
+                    </td>
                 </tr>
                 <tr>
                     <td class="txt-align-c">Resins</td>
-                    <td class="p-0"><label>
-                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
-                    </label></td>
-                    <td class="p-0"><label>
-                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
-                    </label></td>
+                    <td class="p-0">
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0" aria-label="resources-delivered">
+                    </td>
+                    <td class="p-0">
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0" aria-label="resources-needed">
+                    </td>
                 </tr>
                 <tr>
                     <td class="txt-align-c">Metals</td>
-                    <td class="p-0"><label>
-                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
-                    </label></td>
-                    <td class="p-0"><label>
-                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
-                    </label></td>
+                    <td class="p-0">
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0" aria-label="resources-delivered">
+                    </td>
+                    <td class="p-0">
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0" aria-label="resources-needed">
+                    </td>
                 </tr>
                 <tr>
                     <td class="txt-align-c">Ceramics</td>
-                    <td class="p-0"><label>
-                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
-                    </label></td>
-                    <td class="p-0"><label>
-                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
-                    </label></td>
+                    <td class="p-0">
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0" aria-label="resources-delivered">
+                    </td>
+                    <td class="p-0">
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0" aria-label="resources-needed">
+                    </td>
                 </tr>
                 <tr>
                     <td class="txt-align-c">Chemicals</td>
-                    <td class="p-0"><label>
-                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
-                    </label></td>
-                    <td class="p-0"><label>
-                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
-                    </label></td>
+                    <td class="p-0">
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0" aria-label="resources-delivered">
+                    </td>
+                    <td class="p-0">
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0" aria-label="resources-needed">
+                    </td>
                 </tr>
                 <tr>
                     <td class="txt-align-c">Special alloys</td>
-                    <td class="p-0"><label>
-                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
-                    </label></td>
-                    <td class="p-0"><label>
-                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
-                    </label></td>
+                    <td class="p-0">
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0" aria-label="resources-delivered">
+                    </td>
+                    <td class="p-0">
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0" aria-label="resources-needed">
+                    </td>
                 </tr>
                 </tbody>
                 <tfoot>
@@ -116,7 +116,7 @@
                     </tr>
                     <tr>
                         <th class="p-0" style="width: 10rem">
-                            <label for="transport-modes"></label><select id="transport-modes">
+                            <select id="transport-modes" aria-label="Search-transport-modes">
                                 <option value="" disabled hidden>Please choose an option</option>
                             </select>
                         </th>
