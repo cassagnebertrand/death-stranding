@@ -231,127 +231,121 @@ function deleteRow(id) {
 
 
 function render() {
-    let orders = JSON.parse(localStorage.getItem('orders'));
-    if (orders !== null) {
+    let orders = JSON.parse(localStorage.getItem('orders')) ?? [];
+    ordered.innerHTML = ``;
 
-        ordered.innerHTML = orders.length === 0 ? `<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td>
-                            <td>...</td><td>...</td><td>...</td><td>...</td><td class="cell-no-border"></td></tr>` : ``;
+    let totalWeight = 0, totalCrystals = 0, totalResins = 0, totalMetals = 0, totalCeramics = 0, totalChemicals = 0,
+        totalAlloys = 0;
+    let totalSizeType = {
+        s: 0, m: 0, l: 0, xl: 0
+    };
 
+    function spanSizeFormat(obj) {
+        let spanSize = ``;
+        Object.keys(obj).forEach(key => {
+            spanSize += obj[key] > 0 ? `
+                <div class="d-flex-c">${obj[key]}
+                    <span class="x"> \t&#xD7;</span>
+                    <span class="badge-size">${key.toUpperCase()}</span>
+                </div>
+            ` : ``;
+        });
+        return spanSize === `` ? `...` : spanSize;
+    }
 
-        let totalWeight = 0, totalCrystals = 0, totalResins = 0, totalMetals = 0, totalCeramics = 0, totalChemicals = 0,
-            totalAlloys = 0;
-        let totalSizeType = {
-            s: 0, m: 0, l: 0, xl: 0
-        };
-
-
-        const spanSizeFormat = (obj) => {
-            let spanSize = ``;
-            Object.keys(obj).forEach(key => {
-                spanSize += obj[key] > 0 ? `
-                    <div class="d-flex-c">${obj[key]}
-                        <span class="x"> \t&#xD7;</span>
-                        <span class="badge-size">${key.toUpperCase()}</span>
-                    </div>
-                ` : ``;
-            });
-            return spanSize === `` ? `...` : spanSize;
-        };
-
-        orders.forEach(order => {
-            totalWeight += order.orderInfo.totalWeight;
-            totalSizeType.s += order.orderInfo.totalSizeType.s;
-            totalSizeType.m += order.orderInfo.totalSizeType.m;
-            totalSizeType.l += order.orderInfo.totalSizeType.l;
-            totalSizeType.xl += order.orderInfo.totalSizeType.xl;
-            totalCrystals += order.orderInfo.materials[0].totalQuantity;
-            totalResins += order.orderInfo.materials[1].totalQuantity;
-            totalMetals += order.orderInfo.materials[2].totalQuantity;
-            totalCeramics += order.orderInfo.materials[3].totalQuantity;
-            totalChemicals += order.orderInfo.materials[4].totalQuantity;
-            totalAlloys += order.orderInfo.materials[5].totalQuantity;
+    orders.forEach(order => {
+        totalWeight += order.orderInfo.totalWeight;
+        totalSizeType.s += order.orderInfo.totalSizeType.s;
+        totalSizeType.m += order.orderInfo.totalSizeType.m;
+        totalSizeType.l += order.orderInfo.totalSizeType.l;
+        totalSizeType.xl += order.orderInfo.totalSizeType.xl;
+        totalCrystals += order.orderInfo.materials[0].totalQuantity;
+        totalResins += order.orderInfo.materials[1].totalQuantity;
+        totalMetals += order.orderInfo.materials[2].totalQuantity;
+        totalCeramics += order.orderInfo.materials[3].totalQuantity;
+        totalChemicals += order.orderInfo.materials[4].totalQuantity;
+        totalAlloys += order.orderInfo.materials[5].totalQuantity;
 
 
-            const tr = document.createElement('tr');
-            let html = `<tr> <td>${order.orderInfo.name}</td>`;
+        const tr = document.createElement('tr');
+        let html = `<tr> <td>${order.orderInfo.name}</td>`;
 
-            order.orderInfo.materials.forEach(material => {
-                html += `<td>`;
-                if (material.neededQuantity === 0) {
-                    html += `...`;
-                } else if (material.containers.length === 0) {
-                    html += `<span class="c-success">${material.neededQuantity}</span>`;
-                } else {
-                    html += `<span class="c-warning">[ `;
+        order.orderInfo.materials.forEach(material => {
+            html += `<td>`;
+            if (material.neededQuantity === 0) {
+                html += `...`;
+            } else if (material.containers.length === 0) {
+                html += `<span class="c-success">${material.neededQuantity}</span>`;
+            } else {
+                html += `<span class="c-warning">[ `;
 
 
-                    const answer = Object.values(material.containers.reduce((p, v) => {
-                        const old = p[v.quantity];
-                        if (!old)
-                            p[v.quantity] = {...v, count: 1};
-                        else if (old.sort > v.sort)
-                            p[v.quantity] = {...v, count: old.count + 1};
-                        else
-                            p[v.quantity].count++;
-                        return p;
-                    }, {})).reverse();
+                const answer = Object.values(material.containers.reduce((p, v) => {
+                    const old = p[v.quantity];
+                    if (!old)
+                        p[v.quantity] = {...v, count: 1};
+                    else if (old.sort > v.sort)
+                        p[v.quantity] = {...v, count: old.count + 1};
+                    else
+                        p[v.quantity].count++;
+                    return p;
+                }, {})).reverse();
 
-                    let index = answer.length - 1;
-                    answer.forEach(container => {
-                        if (container.count === 1) {
-                            html += `${container.quantity}`;
-                        } else {
-                            html += `${container.quantity}<span class="c-alert">&#xD7;${container.count}</span>`;
-                        }
-                        if (index > 0) {
-                            html += ` + `;
-                            index--
-                        }
-                    })
-                    html += ` ]</span><span class="c-success"> ${material.totalQuantity}</span>`;
-                    const diff = material.totalQuantity - material.neededQuantity;
-                    html += diff > 0 ? ` / <span class="c-alert">-${diff}</span>` : ``;
-                }
-                html += `</td>`;
-            })
-            html += `<td><span class="c-warning">${order.orderInfo.totalWeight}</span></td>
-                    <td><div class="d-flex-c-wrap">${spanSizeFormat(order.orderInfo.totalSizeType)}</div></td>
-                    <td class="cell-no-border"><button class="bg-alert cell-btn" onclick="deleteRow(${order.id})">Delete</button></td>
-                </tr>`;
-            tr.innerHTML = html;
-            ordered.appendChild(tr);
-        })
-
-        const spanSize = spanSizeFormat(totalSizeType);
-
-        function zeroOrNot(value) {
-            return value === 0 ? `...` : `<span class="c-success">${value}</span>`;
-        }
-
-        orderedTotal.innerHTML = `
-            <td class="bg-blue c-w">Total ➔</td>
-            <td>${zeroOrNot(totalCrystals)}</td>
-            <td>${zeroOrNot(totalResins)}</td>
-            <td>${zeroOrNot(totalMetals)}</td>
-            <td>${zeroOrNot(totalCeramics)}</td>
-            <td>${zeroOrNot(totalChemicals)}</td>
-            <td>${zeroOrNot(totalAlloys)}</td>
-            <td><span class="c-warning">${totalWeight}</span></td>
-            <td><div class="d-flex-c">${spanSize}</div></td>
-            <td class="cell-no-border"></td>
-        `;
-
-        function show_hide_column(col_no, do_show) {
-            const table = document.getElementById('ordered-table');
-            const column = table.getElementsByTagName('col')[col_no];
-            if (column) {
-                column.style.visibility = do_show ? "" : "collapse";
+                let index = answer.length - 1;
+                answer.forEach(container => {
+                    if (container.count === 1) {
+                        html += `${container.quantity}`;
+                    } else {
+                        html += `${container.quantity}<span class="c-alert">&#xD7;${container.count}</span>`;
+                    }
+                    if (index > 0) {
+                        html += ` + `;
+                        index--
+                    }
+                })
+                html += ` ]</span><span class="c-success"> ${material.totalQuantity}</span>`;
+                const diff = material.totalQuantity - material.neededQuantity;
+                html += diff > 0 ? ` / <span class="c-alert">-${diff}</span>` : ``;
             }
-        }
+            html += `</td>`;
+        })
+        html += `<td><span class="c-warning">${order.orderInfo.totalWeight}</span></td>
+                <td><div class="d-flex-c-wrap">${spanSizeFormat(order.orderInfo.totalSizeType)}</div></td>
+                <td class="cell-no-border"><button class="bg-alert cell-btn" onclick="deleteRow(${order.id})">Delete</button></td>
+            </tr>`;
+        tr.innerHTML = html;
+        ordered.appendChild(tr);
+    })
 
-        for (let i = 0; i < orderedTotal.children.length; i++) {
-            show_hide_column(i, !(orderedTotal.children[i].innerText === '...'))
+    const spanSize = spanSizeFormat(totalSizeType);
+
+    function zeroOrNot(value) {
+        return value === 0 ? `...` : `<span class="c-success">${value}</span>`;
+    }
+
+    orderedTotal.innerHTML = `<tr>            
+        <td class="bg-blue c-w">Total ➔</td>
+        <td>${zeroOrNot(totalCrystals)}</td>
+        <td>${zeroOrNot(totalResins)}</td>
+        <td>${zeroOrNot(totalMetals)}</td>
+        <td>${zeroOrNot(totalCeramics)}</td>
+        <td>${zeroOrNot(totalChemicals)}</td>
+        <td>${zeroOrNot(totalAlloys)}</td>
+        <td><span class="c-warning">${totalWeight}</span></td>
+        <td><div class="d-flex-c">${spanSize}</div></td>
+        <td class="cell-no-border"></td>
+    </tr>`;
+
+    function show_hide_column(col_no, do_show) {
+        const table = document.getElementById('ordered-table');
+        const column = table.getElementsByTagName('col')[col_no];
+        if (column) {
+            column.style.visibility = do_show ? "" : "collapse";
         }
+    }
+
+    for (let i = 0; i < orderedTotal.children[0].children.length; i++) {
+        show_hide_column(i, !(orderedTotal.children[0].children[i].innerText === '...'))
     }
 }
 
@@ -393,13 +387,9 @@ orderedReset.addEventListener('click', () => {
     playSound('reset');
     setTimeout(() => {
         localStorage.removeItem('orders');
-        ordered.innerHTML = `<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td>
-                            <td>...</td><td>...</td><td>...</td><td class="cell-no-border"></td></tr>`;
-        orderedTotal.innerHTML = `<td class="bg-blue c-w">Total ➔</td><td>...</td><td>...</td><td>...</td><td>...</td>
-                                 <td>...</td><td>...</td><td>...</td><td>...</td><td class="cell-no-border"></td>`;
+        render();
     }, 150);
 });
-
 
 
 //Like
@@ -428,7 +418,8 @@ function playSound(name) {
 
     audio.volume = 0.12;
     audio.currentTime = 0;
-    audio.play().then(() => {});
+    audio.play().then(() => {
+    });
 
 }
 
