@@ -464,7 +464,7 @@ like.addEventListener('click', () => {
 
 // Ajout de span pour les effets de points
 function addLike() {
-    var newSpan = document.createElement("span");
+    let newSpan = document.createElement("span");
     newSpan.innerHTML = "+1";
     newSpan.setAttribute("class", "like-effect c-blue");
     addLikeEffect.append(newSpan);
@@ -480,8 +480,8 @@ function addLike() {
 
 function playSound(name) {
     let audio = new Audio(`assets/sound/${name}.mp3`);
-    audio.volume = 0.12;
     audio.pause();
+    audio.volume = 0.12;
     audio.currentTime = 0;
     audio.play();
 }
