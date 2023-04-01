@@ -224,6 +224,10 @@ table input:invalid {
     background: var(--main-bg-color);
 }
 
+.c-w{
+    color: var(--main-txt-color);
+}
+
 .cell-btn {
     width: 100%;
 }

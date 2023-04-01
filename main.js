@@ -382,7 +382,7 @@ function render() {
 
 
         orderedTotal.innerHTML = `
-            <td class="bg-blue c-bg">Total ➔</td>
+            <td class="bg-blue c-w">Total ➔</td>
             <td>${zeroOrNot(totalCrystals)}</td>
             <td>${zeroOrNot(totalResins)}</td>
             <td>${zeroOrNot(totalMetals)}</td>
@@ -462,7 +462,7 @@ orderedReset.addEventListener('click', () => {
             <td class="cell-no-border"></td>
         </tr>
         `;
-        orderedTotal.innerHTML = `<td class="bg-blue c-bg">Total ➔</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td class="cell-no-border"></td>`;
+        orderedTotal.innerHTML = `<td class="bg-blue c-w">Total ➔</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td class="cell-no-border"></td>`;
     }, 150)
 });
 

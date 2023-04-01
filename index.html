@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    <meta name="description" content="A simple and efficient delivery calculator for Death Stranding">
     <title>Death Stranding - Delivery Loadout</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
@@ -31,8 +32,8 @@
                 </tr>
                 <tr>
                     <th colspan="1">Order name</th>
-                    <td colspan="2"><input id="order-name" class="txt-align-l" type="text" maxlength="30"
-                                           placeholder="Name"></td>
+                    <td colspan="2"><label for="order-name"></label><input id="order-name" class="txt-align-l" type="text" maxlength="30"
+                                                                           placeholder="Name"></td>
                 </tr>
                 <tr>
                     <th>Material</th>
@@ -43,33 +44,57 @@
                 <tbody id="tbody-order">
                 <tr>
                     <td class="txt-align-c">Chiral crystals</td>
-                    <td class="p-0"><input onClick="this.select();" type="number" min="0" max="9999" value="0"></td>
-                    <td class="p-0"><input onClick="this.select();" type="number" min="0" max="9999" value="0"></td>
+                    <td class="p-0"><label>
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
+                    </label></td>
+                    <td class="p-0"><label>
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
+                    </label></td>
                 </tr>
                 <tr>
                     <td class="txt-align-c">Resins</td>
-                    <td class="p-0"><input onClick="this.select();" type="number" min="0" max="9999" value="0"></td>
-                    <td class="p-0"><input onClick="this.select();" type="number" min="0" max="9999" value="0"></td>
+                    <td class="p-0"><label>
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
+                    </label></td>
+                    <td class="p-0"><label>
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
+                    </label></td>
                 </tr>
                 <tr>
                     <td class="txt-align-c">Metals</td>
-                    <td class="p-0"><input onClick="this.select();" type="number" min="0" max="9999" value="0"></td>
-                    <td class="p-0"><input onClick="this.select();" type="number" min="0" max="9999" value="0"></td>
+                    <td class="p-0"><label>
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
+                    </label></td>
+                    <td class="p-0"><label>
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
+                    </label></td>
                 </tr>
                 <tr>
                     <td class="txt-align-c">Ceramics</td>
-                    <td class="p-0"><input onClick="this.select();" type="number" min="0" max="9999" value="0"></td>
-                    <td class="p-0"><input onClick="this.select();" type="number" min="0" max="9999" value="0"></td>
+                    <td class="p-0"><label>
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
+                    </label></td>
+                    <td class="p-0"><label>
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
+                    </label></td>
                 </tr>
                 <tr>
                     <td class="txt-align-c">Chemicals</td>
-                    <td class="p-0"><input onClick="this.select();" type="number" min="0" max="9999" value="0"></td>
-                    <td class="p-0"><input onClick="this.select();" type="number" min="0" max="9999" value="0"></td>
+                    <td class="p-0"><label>
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
+                    </label></td>
+                    <td class="p-0"><label>
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
+                    </label></td>
                 </tr>
                 <tr>
                     <td class="txt-align-c">Special alloys</td>
-                    <td class="p-0"><input onClick="this.select();" type="number" min="0" max="9999" value="0"></td>
-                    <td class="p-0"><input onClick="this.select();" type="number" min="0" max="9999" value="0"></td>
+                    <td class="p-0"><label>
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
+                    </label></td>
+                    <td class="p-0"><label>
+                        <input onClick="this.select();" type="number" min="0" max="9999" value="0">
+                    </label></td>
                 </tr>
                 </tbody>
                 <tfoot>
@@ -91,7 +116,7 @@
                     </tr>
                     <tr>
                         <th class="p-0" style="width: 10rem">
-                            <select id="transport-modes">
+                            <label for="transport-modes"></label><select id="transport-modes">
                                 <option value="" disabled hidden>Please choose an option</option>
                             </select>
                         </th>
@@ -126,11 +151,11 @@
                     <tr>
                         <td class="d-flex-c">The <span class="badge-size">XL</span> size take 6 capacity</td>
                         <td class="p-0">
-                            <div class="d-flex-c"><input id="xl-input" name="xl-input" type="number" min="0" max="99"
-                                                         value="0" readonly>
+                            <div class="d-flex-c"><label for="xl-input"></label><input id="xl-input" name="xl-input" type="number" min="0" max="99"
+                                                                                       value="0" readonly>
                                 <div class="d-flex-col">
-                                    <button class="btn-inc" onclick="inc('xl-input')"></button>
-                                    <button class="btn-dec" onclick="dec('xl-input')"></button>
+                                    <button class="btn-inc" onclick="inc('xl-input')" aria-label="extra-large-input-increment"></button>
+                                    <button class="btn-dec" onclick="dec('xl-input')" aria-label="extra-large-input-decrement"></button>
                                 </div>
                             </div>
                         </td>
@@ -138,11 +163,11 @@
                     <tr>
                         <td class="d-flex-c">The <span class="badge-size">L</span> size take 4 capacity</td>
                         <td class="p-0">
-                            <div class="d-flex-c"><input id="l-input" name="l-input" type="number" min="0" max="99"
-                                                         value="0" readonly>
+                            <div class="d-flex-c"><label for="l-input"></label><input id="l-input" name="l-input" type="number" min="0" max="99"
+                                                                                      value="0" readonly>
                                 <div class="d-flex-col">
-                                    <button class="btn-inc" onclick="inc('l-input')"></button>
-                                    <button class="btn-dec" onclick="dec('l-input')"></button>
+                                    <button class="btn-inc" onclick="inc('l-input')" aria-label="large-input-increment"></button>
+                                    <button class="btn-dec" onclick="dec('l-input')" aria-label="large-input-decrement"></button>
                                 </div>
                             </div>
                         </td>
@@ -150,11 +175,11 @@
                     <tr>
                         <td class="d-flex-c">The <span class="badge-size">M</span> size take 2 capacity</td>
                         <td class="p-0">
-                            <div class="d-flex-c"><input id="m-input" name="m-input" type="number" min="0" max="99"
-                                                         value="0" readonly>
+                            <div class="d-flex-c"><label for="m-input"></label><input id="m-input" name="m-input" type="number" min="0" max="99"
+                                                                                      value="0" readonly>
                                 <div class="d-flex-col">
-                                    <button class="btn-inc" onclick="inc('m-input')"></button>
-                                    <button class="btn-dec" onclick="dec('m-input')"></button>
+                                    <button class="btn-inc" onclick="inc('m-input')" aria-label="medium-input-increment"></button>
+                                    <button class="btn-dec" onclick="dec('m-input')" aria-label="medium-input-decrement"></button>
                                 </div>
                             </div>
                         </td>
@@ -162,11 +187,11 @@
                     <tr>
                         <td class="d-flex-c">The <span class="badge-size">S</span> size take 1 capacity</td>
                         <td class="p-0">
-                            <div class="d-flex-c"><input id="s-input" name="s-input" type="number" min="0" max="99"
-                                                         value="0" readonly>
+                            <div class="d-flex-c"><label for="s-input"></label><input id="s-input" name="s-input" type="number" min="0" max="99"
+                                                                                      value="0" readonly>
                                 <div class="d-flex-col">
-                                    <button class="btn-inc" onclick="inc('s-input')"></button>
-                                    <button class="btn-dec" onclick="dec('s-input')"></button>
+                                    <button class="btn-inc" onclick="inc('s-input')" aria-label="small-input-increment">></button>
+                                    <button class="btn-dec" onclick="dec('s-input')" aria-label="small-input-decrement"></button>
                                 </div>
                             </div>
                         </td>
@@ -226,7 +251,7 @@
         </tbody>
         <tfoot>
         <tr id="ordered-total">
-            <td class="bg-blue c-bg">Total ➔</td>
+            <td class="bg-blue c-w">Total ➔</td>
             <td>...</td>
             <td>...</td>
             <td>...</td>
