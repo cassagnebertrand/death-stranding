@@ -190,7 +190,9 @@ function save(rawOrder) {
                 neededQuantity: rawOrder[6],
                 totalQuantity: deliveryInfo(allocate(materials[5], rawOrder[6]))[1],
                 info: deliveryInfo(allocate(materials[5], rawOrder[6]))[0]
-            }], totalWeight: 0, totalSizeType: {
+            }],
+            totalWeight: 0,
+            totalSizeType: {
                 s: 0, m: 0, l: 0, xl: 0
             }
         }
